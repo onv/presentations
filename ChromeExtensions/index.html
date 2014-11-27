@@ -384,7 +384,7 @@
 						</ul>
 					</section>
 					<section>
-						<h3>Difference</h3>
+						<h3>Key points</h3>
 						<ul class="fragment">
 							<li class="fragment">Each extension can have at most one browser action or page action.</li>
 							<li class="fragment">The both browser and page actions can have an icon, a tooltip, and popup.</li>
@@ -729,6 +729,36 @@ chrome.exe --pack-extension=C:\myext --pack-extension-key=C:\myext.pem
 							</code>
 						</pre>
 					</section>
+					<section>
+						<h3>Check for updates</h3>
+						<ul>
+							<li class="fragment">
+								<p>Automatically by browser</p>
+								<pre class="fragment">
+									<code data-trim class="XML">
+chrome.exe --extensions-update-frequency=45
+									</code>
+								</pre>
+							</li>
+							<li class="fragment">
+								<p>Programmatically</p>
+								<pre class="fragment">
+									<code data-trim class="XML">
+chrome.runtime.requestUpdateCheck(function(status, details) {
+  if (status == "update_available") {
+    console.log("update pending...");
+  } else if (status == "no_update") {
+    console.log("no update found");
+  } else if (status == "throttled") {
+    console.log("Oops, I'm asking too frequently.");
+  }
+});
+									</code>
+								</pre>
+							</li>
+						</ul>
+					</section>
+
 				</section>	
 				
 				<section>
