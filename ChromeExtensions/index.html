@@ -58,20 +58,20 @@
 						Extensions are small software programs that can modify and enhance the functionality of the browser.
 					</p>
 					<br/>
-					<ul>
-						<li class="fragment">You can add functionality to the browser without diving deeply into native code</li>
-						<li class="fragment">You can use core web technologies that you're already familiar with</li>
-						<li class="fragment">Unlike ordinary web apps, extensions don't need to depend on content from the web</li>
+					<ul class="fragment">
+						<li>You can add functionality to the browser without diving deeply into native code</li>
+						<li>You can use core web technologies that you're already familiar with</li>
+						<li>Unlike ordinary web apps, extensions don't need to depend on content from the web</li>
 					</ul>
 				</section>
 				
 				<section>
 					<h2>Extension structure</h2>
-					<ul>
-						<li class="fragment">A <i>manifest</i> file</li>
-						<li class="fragment">One or more HTML files (unless the extension is a theme)</li>
-						<li class="fragment"><i>Optional</i>: One or more JavaScript files</li>
-						<li class="fragment"><i>Optional</i>: Any other files your extension needs (e.g., image files)</li>
+					<ul class="fragment">
+						<li>A <i>manifest</i> file</li>
+						<li><i>Optional</i>: One or more HTML files (unless the extension is a theme)</li>
+						<li><i>Optional</i>: One or more JavaScript files</li>
+						<li><i>Optional</i>: Any other files your extension needs (e.g., image files)</li>
 					</ul>
 				</section>
 
@@ -386,9 +386,9 @@
 					<section>
 						<h3>Key points</h3>
 						<ul class="fragment">
-							<li class="fragment">Each extension can have at most one browser action or page action.</li>
-							<li class="fragment">The both browser and page actions can have an icon, a tooltip, and popup.</li>
-							<li class="fragment">Browser action can also have a badge but page action can't have. In addition, page actions can appear and disappear.</li>
+							<li>Each extension can have at most one browser action or page action.</li>
+							<li>The both browser and page actions can have an icon, a tooltip, and popup.</li>
+							<li>Browser action can also have a badge but page action can't have. In addition, page actions can appear and disappear.</li>
 						</ul>
 					</section>
 				</section>
@@ -397,12 +397,12 @@
 					<section>
 						<h2>Communication between pages</h2>
 						<br/>
-						<ul>
-							<li class="fragment">Direct access</li>
-							<li class="fragment">Simple one-time requests</li>
-							<li class="fragment">Long-lived connections</li>
-							<li class="fragment">Cross-extension messaging</li>
-							<li class="fragment">Sending messages from web pages</li>
+						<ul class="fragment">
+							<li>Direct access</li>
+							<li>Simple one-time requests</li>
+							<li>Long-lived connections</li>
+							<li>Cross-extension messaging</li>
+							<li>Sending messages from web pages</li>
 						</ul>
 					</section>
 					<section>
@@ -421,6 +421,14 @@ var views = chrome.extension.getViews({ type: "popup" });
 							</code>
 						</pre>
 						<p class="fragment">Once a page has a reference to other pages within the extension, the first page can invoke functions on the other pages, and it can manipulate their DOMs.</p>
+						<pre class="fragment">
+							<code data-trim class="javascript">
+// If the background page is an event page, 
+// the system will ensure it is loaded before calling the callback. 
+// If there is no background page, an error is set.
+chrome.runtime.getBackgroundPage(function(Window backgroundPage) {...});
+							</code>
+						</pre>
 					</section>
 					<section>
 						<h3>Simple one-time requests</h3>
@@ -520,9 +528,9 @@ chrome.runtime.onMessageExternal.addListener(
 					</section>
 					<section>
 						<h2>Required vs Optional Permissions</h2>
-						<ul>
-							<li class="fragment"><b>required permissions</b> - use when they are needed for your extension's basic functionality</li>
-							<li class="fragment"><b>optional permissions</b> - use when they are needed for optional features in your extension</li>
+						<ul class="fragment">
+							<li><b>required permissions</b> - use when they are needed for your extension's basic functionality</li>
+							<li><b>optional permissions</b> - use when they are needed for optional features in your extension</li>
 						</ul>
 						<br/><br/>
 						<h3 class="fragment">Declare permissions in the manifest</h3>
@@ -629,10 +637,10 @@ chrome.permissions.request({
 						<p class="fragment">Extensions are packaged as signed ZIP files with the file extension ".crx".</p>
 						<p class="fragment">When you package an extension, the extension is assigned a unique key pair. The extension's ID is based on a hash of the public key. The private key is used to sign each version of the extension and must be secured from public access.</p>
 						<br/>
-						<h3 class="fragment">Ways to publish</h3>
-						<ul>
-							<li class="fragment">Distribute a non-public version of the extension</li>
-							<li class="fragment">Publish the extension using the Chrome Developer Dashboard</li>
+						<h3 class="fragment">How to publish</h3>
+						<ul class="fragment">
+							<li>Distribute a non-public version of the extension</li>
+							<li>Publish the extension using the Chrome Developer Dashboard</li>
 						</ul>
 					</section>
 					<section>
@@ -640,17 +648,17 @@ chrome.permissions.request({
 						<ul>
 							<li class="fragment">
 								<p>Via Chrome Extensions tab:</p>
-								<ol>
-									<li class="fragment">
+								<ol class="fragment">
+									<li>
 										Go to Settings->Extensions tab (chrome://extensions)
 									</li>
-									<li class="fragment">
+									<li>
 										Enable "Developer mode" checkbox at the top.
 									</li>
-									<li class="fragment">
+									<li>
 										Click the "Pack extension" button and specify the path to the extension dir (you don't need to specify the path to private key file for the first time).
 									</li>
-									<li class="fragment">
+									<li>
 										Click "Package" button and two files (".crx" - extension and ".pem" - private key) will be created.
 									</li>
 									<br/>
@@ -668,23 +676,23 @@ chrome.exe --pack-extension=C:\myext --pack-extension-key=C:\myext.pem
 					</section>
 					<section>
 						<h3>Chrome Developer Dashboard</h3>
-						<ol>
-							<li class="fragment">
+						<ol class="fragment">
+							<li>
 								Create a ZIP archive of the root extension directory
 							</li>
-							<li class="fragment">
+							<li>
 								Go to Chrome Developer Dashboard (https://chrome.google.com/webstore/developer/dashboard)
 							</li>
-							<li class="fragment">
+							<li>
 								Click the "Add new item" button, choose created ZIP file and click "Upload"
 							</li>
-							<li class="fragment">
+							<li>
 								Fill out the form about your extension and upload images.
 							</li>
-							<li class="fragment">
+							<li>
 								Before you publish your first app, you must pay a one-time $5 developer signup fee.
 							</li>
-							<li class="fragment">
+							<li>
 								Test the extencion and click the "Publish" link to publish your app's listing in the Chrome Web Store.
 							</li>
 						</ol>
@@ -694,11 +702,11 @@ chrome.exe --pack-extension=C:\myext --pack-extension-key=C:\myext.pem
 				<section>
 					<section>
 						<h3>Autoupdating</h3>
-						<ul>
-							<li class="fragment">
+						<ul class="fragment">
+							<li>
 								A manifest should contain an "update_url" field, pointing to a location for doing update checks.
 							</li>
-							<li class="fragment">
+							<li>
 								The content returned by an update check is an update manifest XML document listing the latest version of an extension.
 							</li>
 						</ul>
@@ -765,7 +773,9 @@ chrome.runtime.requestUpdateCheck(function(status, details) {
 					<h2>Links</h2>
 					<ul>
 						<li><a href="https://developer.chrome.com/extensions">https://developer.chrome.com/extensions</a></li>
-						<li><a href="https://developer.chrome.com/webstore/get_started_simple">https://developer.chrome.com/webstore/get_started_simple</a></li>
+						<li><a href="https://developer.chrome.com/extensions/samples">https://developer.chrome.com/extensions/samples</a></li>
+						<li><a href="https://github.com/yeoman/generator-chrome-extension">https://github.com/yeoman/generator-chrome-extension</a></li>
+						<li><a href="https://developer.chrome.com/webstore/get_started_simple">https://developer.chrome.com/webstore/get_started_simple</a></li>						
 					</ul>
 				</section>
 
