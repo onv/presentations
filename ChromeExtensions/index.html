@@ -391,6 +391,34 @@
 							<li>Browser action can also have a badge but page action can't have. In addition, page actions can appear and disappear.</li>
 						</ul>
 					</section>
+					<section>
+						<h2>API</h2>
+						<br/>
+						<h3 class="fragment">chrome.browserAction.*</h3>
+						<pre class="fragment">
+							<code data-trim class="javascript">
+chrome.browserAction.set[get]Title(object details[, function callback]);
+chrome.browserAction.set[get]BadgeText(object details[, function callback]);
+chrome.browserAction.set[get]BadgeBackgroundColor(object details[, function callback]);
+chrome.browserAction.set[get]Popup(object details[, function callback]);
+chrome.browserAction.enable[disable](integer tabId);
+chrome.browserAction.setIcon(object details);
+
+chrome.browserAction.onClicked.addListener(function(tab) {...});
+							</code>
+						</pre>
+						<h3 class="fragment">chrome.pageAction.*</h3>
+						<pre class="fragment">
+							<code data-trim class="javascript">
+chrome.pageAction.set[get]Title(object details[, function callback]);
+chrome.pageAction.set[get]Popup(object details[, function callback]);
+chrome.pageAction.show[hide](integer tabId);
+chrome.pageAction.setIcon(object details);
+
+chrome.pageAction.onClicked.addListener(function(tab) {...});
+							</code>
+						</pre>
+					</section>
 				</section>
 
 				<section>
@@ -517,7 +545,42 @@ chrome.runtime.onMessageExternal.addListener(
 						<p class="fragment">If there is no <b>externally_connectable</b>, all extensions and apps can connect, but no webpages can connect.</p>
 						<p class="fragment">If you use <b>externally_connectable</b> and "ids": ["*"] is not specified then other extensions will lose the ability to connect to it.</p>
 					</section>
-				</section>	
+				</section>
+
+				<section>
+					<section>
+						<h2>Content Security Policy (CSP)</h2>
+						<p class="fragment">CSP introduces some fairly strict policies that will make extensions more secure by default, and provides you with the ability to create and enforce rules governing the types of content that can be loaded and executed by your extensions and applications.</p>
+						<pre class="fragment">
+							<code data-trim class="javascript">
+{
+  ...,
+  "content_security_policy": "[POLICY STRING GOES HERE]"
+  ...
+}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Default Policy Restrictions</h2>
+						<pre class="fragment">
+							<code data-trim class="javascript">
+{
+  ...,
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+  ...
+}
+							</code>
+						</pre>
+						<ul class="fragment">
+							<li>Eval and related functions are disabled</li>
+							<li>Inline JavaScript will not be executed</li>
+							<li>Only local script and and object resources are loaded</li>
+						</ul>
+						<br/><br/>
+						<p class="fragment">CSP applies to the <b>background pages</b> and <b>event pages</b> of the extension.</p>
+					</section>
+				</section>
 				
 				<section>
 					<section>
